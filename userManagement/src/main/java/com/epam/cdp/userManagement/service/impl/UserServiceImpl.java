@@ -10,7 +10,7 @@ import com.epam.cdp.userManagement.model.User;
 import com.epam.cdp.userManagement.service.IUserService;
 import com.epam.cdp.userManagement.util.UserStore;
 
-@Service
+
 public class UserServiceImpl implements IUserService {
 
 	@Autowired

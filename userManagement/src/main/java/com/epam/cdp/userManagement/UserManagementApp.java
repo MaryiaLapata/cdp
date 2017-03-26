@@ -8,16 +8,25 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Import;
 
+import com.epam.cdp.userManagement.config.ApplicationConfig;
+import com.epam.cdp.userManagement.config.ApplicationProperties;
+import com.epam.cdp.userManagement.listener.ApplicationStartingListener;
+import com.epam.cdp.userManagement.listener.HelloApplicationListener;
 import com.epam.cdp.userManagement.model.Address;
 import com.epam.cdp.userManagement.model.User;
 import com.epam.cdp.userManagement.util.UserStore;
 
 @SpringBootApplication
+//@EnableConfigurationProperties(ApplicationProperties.class)
+@Import(ApplicationConfig.class)
 public class UserManagementApp {
 	
 	@Autowired
-	public UserStore userStore;
+	public ApplicationProperties properties;
 
 	
 	public UserManagementApp() {
@@ -25,23 +34,15 @@ public class UserManagementApp {
     }
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserManagementApp.class, args);
+		//SpringApplication.run(UserManagementApp.class, args);
+		new SpringApplicationBuilder(UserManagementApp.class)
+		.listeners(new ApplicationStartingListener(), new HelloApplicationListener())
+		.run(args);
 	}
 	
 	@PostConstruct
 	public void init() {
-		List<User> users = new ArrayList<>();
-		User user;
-		Address address;
-		
-		for(int i = 1; i <= 10; i++){
-			address = new Address(i, "Minsk", "Street" + i, i + 10, i*10);
-			user = new User(i*100, "firstName" + i, "lastName" + i, "email" + i + "@dot.com", "1234567", address);
-			
-			users.add(user);
-		}
-		
-		userStore.setUserList(users);
+		System.out.println(properties.toString());
 	}
 
 }
