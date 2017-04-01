@@ -1,0 +1,25 @@
+server:
+    port: 9000
+spring:
+  application:
+    name: userManagement
+
+endpoints:
+  health:
+    sensitive: false
+management:
+  port: 3000
+  
+app:
+  main: /users/
+  error: /error/
+---
+spring:
+    profiles: development
+server:
+    port: 8181
+---
+server:
+    port: 8282
+spring:
+    profiles: production
