@@ -29,7 +29,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile("org.springframework.boot:spring-boot-starter-test")
     compile("org.springframework.boot:spring-boot-devtools")
-
+    
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile("mysql:mysql-connector-java")
+	testCompile("com.h2database:h2")
+	testCompile("junit:junit")
 }
 
 processResources {

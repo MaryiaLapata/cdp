@@ -33,9 +33,14 @@ public class UserController {
     public User getUserDetails(@PathVariable("id") long id) {
 		return userService.getById(id);
 	}
+	
+	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
+    public void deleteUser(@PathVariable("id") long id) {
+		userService.delete(id);
+	}
 
 	@RequestMapping(value="/users", method=RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User createUser(@RequestBody User newUser) {
+    public long createUser(@RequestBody User newUser) {
 		return userService.create(newUser);
 	}
 	

@@ -1,47 +1,54 @@
 package com.epam.cdp.userManagement.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.epam.cdp.userManagement.dao.EntityRepository;
+import com.epam.cdp.userManagement.dao.UserRepository;
+import com.epam.cdp.userManagement.model.Address;
 import com.epam.cdp.userManagement.model.User;
 import com.epam.cdp.userManagement.service.IUserService;
-import com.epam.cdp.userManagement.util.UserStore;
 
 
 public class UserServiceImpl implements IUserService {
 
 	@Autowired
-	private UserStore userStore;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private EntityRepository<Address> addressRepository;
 	
 	@Override
 	public List<User> getAll() {
-		return userStore.getUserList();
+		return userRepository.getAll();
 	}
 
 	@Override
 	public User getById(long userId) {
-		return userStore.getUserMap().get(userId);
+		return userRepository.getById(userId);
 	}
 
 	@Override
-	public User create(User newUser) {		
-		return userStore.addUserToList(newUser);
+	public long create(User newUser) {	
+		long addressId = addressRepository.create(newUser.getAddress());
+		newUser.getAddress().setId(addressId);
+		return userRepository.create(newUser);
 	}
 
 	@Override
 	public User update(long id, User user) {
-		Map<Long, User> userMap = userStore.getUserMap();
-		User targetUser = userMap.get(id);
+		user.setId(id);
 		
-		targetUser.setAdress(user.getAdress());
-		targetUser.setEmail(user.getEmail());
-		targetUser.setFirstName(user.getFirstName());
-		targetUser.setLastName(user.getLastName());
-		targetUser.setPhone(user.getPhone());
+		if(userRepository.update(user) > 0) {
+			return userRepository.getById(id);
+		}
 		
-		return targetUser;
+		return null;
+	}
+
+	@Override
+	public void delete(long id) {
+		userRepository.delete(id);
+		
 	}
 }

@@ -1,5 +1,7 @@
 package com.epam.cdp.userManagement.model;
 
+import java.util.List;
+
 public class User {
 	
 	private long id;
@@ -8,6 +10,8 @@ public class User {
 	private String email;
 	private String phone;
 	private Address address;
+	private List<Group> groupList;
+	private List<Permission> permissionList;
 	
 	public User(){};
 	
@@ -63,6 +67,30 @@ public class User {
 	}
 	public void setAdress(Address adress) {
 		this.address = adress;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Group> getGroupList() {
+		return groupList;
+	}
+
+	public void setGroupList(List<Group> groupList) {
+		this.groupList = groupList;
+	}
+
+	public List<Permission> getPermissionList() {
+		return permissionList;
+	}
+
+	public void setPermissionList(List<Permission> permissionList) {
+		this.permissionList = permissionList;
 	}
 	
 	

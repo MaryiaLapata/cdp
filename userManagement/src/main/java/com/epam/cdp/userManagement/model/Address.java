@@ -10,6 +10,10 @@ public class Address {
 	
 	public Address(){}
 	
+	public Address(long id){
+		this.id = id;
+	}
+	
 	public Address(String city, String street, int houseNumber, int flatNumber){
 		this.city = city;
 		this.street = street;
