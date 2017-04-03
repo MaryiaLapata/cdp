@@ -65,8 +65,8 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public void assignPermissions(long userId, List<Long> permissionIds) {
-		for(Long id : permissionIds) {
+	public void assignPermissions(long userId, long[] permissionIds) {
+		for(long id : permissionIds) {
 			jdbcTemplate.update(
 					SQL_ADD_PERMISSION,
 					userId, id);

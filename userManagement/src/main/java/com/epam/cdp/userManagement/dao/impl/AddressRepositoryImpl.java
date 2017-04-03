@@ -19,7 +19,7 @@ import com.epam.cdp.userManagement.model.Address;
 public class AddressRepositoryImpl implements EntityRepository<Address> {
 	
 	private String SQL_INSERT = "INSERT INTO address(city, street, house_number, flat_number) VALUES (:city, :street, :houseNumber, :flatNumber)";
-	private String SQL_SELECT = "SELECT * FROM address WHERE adress_id=?";
+	private String SQL_SELECT = "SELECT * FROM address WHERE address_id=?";
 	private String SQL_SELECT_ALL = "SELECT * FROM address";
 	private String SQL_DELETE = "DELETE FROM address WHERE address_id=?";
 	private String SQL_UPDATE = "update address set city=?, street=?, house_number=?, flat_number=? WHERE address_id=?";

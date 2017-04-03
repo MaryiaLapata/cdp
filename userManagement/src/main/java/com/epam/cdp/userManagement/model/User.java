@@ -65,9 +65,6 @@ public class User {
 	public Address getAdress() {
 		return address;
 	}
-	public void setAdress(Address adress) {
-		this.address = adress;
-	}
 
 	public Address getAddress() {
 		return address;
